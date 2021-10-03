@@ -45,15 +45,19 @@ class Cache():
             json.dump(data, f, indent=4)
 
 
-def make(deps: List[Path] = [], targets: List[Path] = []):
+def make(deps: List[Path] = [],
+         targets: List[Path] = [],
+         add_funcpath_dep=True):
     def decorator(func: Callable):
         def wrapper():
             cache = Cache()
-            if type(func) is partial:
-                fpath = Path(func.func.__code__.co_filename)
-            else:
-                fpath = Path(func.__code__.co_filename)
-            alldeps = deps + [fpath]
+            alldeps = deps.copy()
+            if add_funcpath_dep:
+                if type(func) is partial:
+                    fpath = Path(func.func.__code__.co_filename)
+                else:
+                    fpath = Path(func.__code__.co_filename)
+                alldeps.append(fpath)
             can_run = all([path.exists() for path in alldeps])
             if not can_run:
                 sucessfull = False
