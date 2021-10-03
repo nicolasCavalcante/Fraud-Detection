@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fraud_detection = {editable = true, path = "."}
+scikit-learn = ">=1.0"
+pandasgui = "*"
+mlflow = "*"
+ipykernel = "*"
+seaborn = "*"
+nbformat = "*"
+
+[dev-packages]
+isort = "*"
+pytest = "*"
+flake8 = "*"
+yapf = "*"
+nbqa = "*"
+autoflake = "*"
+doit = "*"
+
+[requires]
+python_version = "3.7"
