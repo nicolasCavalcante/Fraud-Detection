@@ -9,7 +9,7 @@ from fraud_detection.utils import DATA_DIR, Callable, make
 def subsample_func(dependencies: List[Path],
                    targets: List[Path],
                    nsamples=50000,
-                   stratified=False):
+                   stratified=False) -> bool:
     print('Subsampling raw data')
     df = pipelines.make_dataset()
     if df.empty:
