@@ -1,7 +1,7 @@
 """execute created pipelines"""
 import pandas as pd
 
-from fraud_detection.nodes import download, predict, train, tsne
+from fraud_detection.nodes import download, predict, subsample, train, tsne
 from fraud_detection.utils import DATA_DIR
 
 
@@ -9,6 +9,15 @@ def make_dataset() -> pd.DataFrame:
     if download():
         datapath = DATA_DIR / '0_external/kaggle/'
         filepath = list(datapath.glob('*.csv')).pop()
+        return pd.read_csv(filepath)
+    return pd.DataFrame([])
+
+
+def make_subsample(nsamples=50000, stratified=False) -> pd.DataFrame:
+    if subsample(nsamples=nsamples, stratified=stratified)():
+        file_name = f'{nsamples}_samples' + ('_stratified'
+                                             if stratified else '') + '.csv'
+        filepath = DATA_DIR / f'1_interim/{file_name}'
         return pd.read_csv(filepath)
     return pd.DataFrame([])
 

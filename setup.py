@@ -12,7 +12,8 @@ def read(path: Path):
 
 setup(
     name='fraud_detection',
-    description='Preserve bank money by detecting fraudulent transactions from transactions history',
+    description=
+    'Preserve bank money by detecting fraudulent transactions from transactions history',
     author="Nicolas Garcia Cavalcante",
     author_email='nicolasgcavalcante@gmail.com',
     packages=find_packages(include=['fraud_detection', 'fraud_detection.*']),
