@@ -7,7 +7,7 @@ from fraud_detection.utils import MLFLOW_DIR
 CMD_SEP = '&' if platform.system() == 'Windows' else ';'
 SELF_PATH = Path(__file__).parent.absolute()
 NBS_PATH = SELF_PATH / 'notebooks'
-DOIT_CONFIG = {'default_tasks': ['nodes', 'format', 'formatnb', 'pytest']}
+DOIT_CONFIG = {'default_tasks': ['nodes', 'format', 'formatnb']}
 
 
 def syscmd(string):
@@ -54,7 +54,10 @@ def task_formatnb():
 
 def task_pytest():
     """run pytests under tests folder"""
-    return {'actions': [lambda: syscmd('pytest tests/')], 'verbosity': 2}
+    return {
+        'actions': [lambda: syscmd('pytest tests/ --disable-pytest-warnings')],
+        'verbosity': 2
+    }
 
 
 def task_ui():
