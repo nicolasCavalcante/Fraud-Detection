@@ -7,7 +7,9 @@ from fraud_detection.utils import DATA_DIR
 
 def make_dataset() -> pd.DataFrame:
     if download():
-        return pd.read_csv(DATA_DIR / '0_external/raw.csv')
+        datapath = DATA_DIR / '0_external/kaggle/'
+        filepath = list(datapath.glob('*.csv')).pop()
+        return pd.read_csv(filepath)
     return pd.DataFrame([])
 
 
@@ -27,6 +29,6 @@ def make_prediction(df: pd.DataFrame):
 
 if __name__ == '__main__':
     make_dataset()
-    make_train()
-    make_tsne(dim=2)
-    make_tsne(dim=3)
+    # make_train()
+    # make_tsne(dim=2)
+    # make_tsne(dim=3)

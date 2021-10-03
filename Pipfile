@@ -11,6 +11,7 @@ mlflow = "*"
 ipykernel = "*"
 seaborn = "*"
 nbformat = "*"
+kaggle = "*"
 
 [dev-packages]
 isort = "*"

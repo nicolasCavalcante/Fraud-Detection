@@ -2,15 +2,18 @@
 from pathlib import Path
 from typing import List
 
+import kaggle
+
 from fraud_detection.utils import DATA_DIR, make
 
 
-@make(targets=[DATA_DIR / '0_external/raw.csv'])
+@make(targets=[DATA_DIR / '0_external/kaggle'])
 def download(deps: List[Path] = [], targets: List[Path] = []):
     print('downloading')
-    from pandasgui.datasets import iris
-    savepath, = targets
-    iris.to_csv(savepath, index=False, header=True)
+    kaggle.api.dataset_download_files('ealaxi/paysim1',
+                                      path=DATA_DIR / '0_external/kaggle',
+                                      quiet=False,
+                                      unzip=True)
     return True
 
 
