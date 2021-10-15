@@ -15,6 +15,8 @@ def subsample_func(dependencies: List[Path],
     if df.empty:
         return False
     savepath, = targets
+    if nsamples == -1:
+        nsamples = df.shape[0]
     if stratified:
         nsamples = min(nsamples / 2, df.isFraud.sum())
         df = df.groupby('isFraud').sample(df.isFraud.sum())
